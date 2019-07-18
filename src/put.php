@@ -22,11 +22,15 @@
     if ($_POST['private'] && $_POST['private'] === 'on') {
       $acl = 'private';
     }
+    $key = $name;
+    if ($_POST['path']) {
+      $key = trim($_POST['path'], '/')."/{$name}";
+    }
     try {
       // Upload data.
       $result = $s3->putObject([
           'Bucket' => getenv('AWS_BUCKET'), // bucket name
-          'Key'    => trim($_POST['path'], '/')."/{$name}", // file path inside bucket
+          'Key'    => $key, // file path inside bucket
           'Body'   => fopen($localPath, 'rb'), // file itself
           'ACL'    => $acl // file access rules [https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl]
       ]);

@@ -4,9 +4,11 @@
   use Aws\S3\S3Client;
   use Aws\S3\Exception\S3Exception;
 
-  //Create a S3Client
+  // Create a S3Client
+  // Credentials are read from environment
+  // through .env which is used in docker image
   $s3 = new Aws\S3\S3Client([
       'version' => 'latest',
-      'region' => 'eu-west-2'
+      'region' => getenv('AWS_REGION')
   ]);
 ?>

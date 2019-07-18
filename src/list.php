@@ -15,6 +15,8 @@
     'Delimiter' => $delimiter,
     'Prefix' => $prefix,
   ]);
+
+  $list = $objects->get('Contents') ? $objects->get('Contents') : [];
 ?>
 
 <!DOCTYPE html>
@@ -39,8 +41,8 @@
           <th>File</th>
         </tr>
       </thead>
-      <?php foreach($objects->get('Contents') as $object): 
-        $key = $object['Key'];
+      <?php foreach($list as $item): 
+        $key = $item['Key'];
         $url = $s3->getObjectUrl($bucket, $key);
       ?>
       <tr>

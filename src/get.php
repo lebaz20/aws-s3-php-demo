@@ -7,7 +7,6 @@
     $object = $s3->getObject([
       'Bucket' => getenv('AWS_BUCKET'),
       'Key' => $_POST['key'],
-      'Prefix' => $prefix,
     ]);
   }
 ?>
@@ -24,7 +23,7 @@
     <br />
     <form action="get.php" method="POST">
       <lable>Key</lable><input type="text" name="key">
-      <input type="submit" value="Fetch">
+      <input type="submit" value="Get">
     </form>
     <br />
     <?php 
